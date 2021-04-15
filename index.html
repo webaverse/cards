@@ -50,7 +50,6 @@
 <div id=container></div>
 <script type=module>
 import procgen, {types} from './procgen.js';
-import webfont from './webfont.js';
 
 function parseQuery(queryString) {
   var query = {};
@@ -146,6 +145,20 @@ if (!isNaN(tokenId)) {
       p.style = `fill:url(#${g.id});`;
     }
   }
+  
+  await Promise.all([
+    'FuturaLT',
+    'MS-Gothic',
+    'FuturaStd-BoldOblique',
+    'GillSans',
+    'GillSans-CondensedBold',
+    'FuturaStd-Heavy',
+    'FuturaLT-CondensedLight',
+    'SanvitoPro-LtCapt',
+    'FuturaLT-Book',
+  ].map(fontFamily => {
+    return document.fonts.load(`16px "${fontFamily}"`);
+  }));
   
   /* window.parent.postMessage({
     ok: true, 
