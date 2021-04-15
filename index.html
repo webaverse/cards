@@ -8,11 +8,11 @@
   * {
     box-sizing: border-box;
   }
-  #container {
+  /* #container {
     --size: 300px;
     width: var(--size);
     height: calc(var(--size) / 2.5 * 3.5);
-  }
+  } */
   @font-face {
     font-family: 'FuturaLT';
     src: url('/fonts/FuturaLT.woff2');
@@ -103,6 +103,8 @@ if (!isNaN(tokenId)) {
   svg.innerHTML = cardSvgSource;
 
   const container = document.getElementById('container');
+  container.style.width = `${cardWidth}px`;
+  container.style.height = `${cardHeight}px`;
   container.appendChild(svg);
 
   {
