@@ -146,19 +146,7 @@ if (!isNaN(tokenId)) {
     }
   }
   
-  /* {
-    const images = Array(svg.querySelectorAll('image'));
-    console.log('got images 1', images);
-    await Promise.all(images.map(image => new Promise((accept, reject) => {
-      image.addEventListener('load', e => {
-        accept();
-      });
-      image.addEventListener('error', reject);
-    })));
-    console.log('got images 2', images);
-  } */
-  
-  await Promise.all([
+  /* await Promise.all([
     'FuturaLT',
     'MS-Gothic',
     'FuturaStd-BoldOblique',
@@ -170,7 +158,7 @@ if (!isNaN(tokenId)) {
     'FuturaLT-Book',
   ].map(fontFamily => {
     return document.fonts.load(`16px "${fontFamily}"`);
-  }));
+  })); */
   
   /* window.parent.postMessage({
     ok: true, 
