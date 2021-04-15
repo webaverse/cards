@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <body>
-  <div className="card-svg-inner"></div>
+  <div className="card-svg-inner" id=container></div>
 <script type=module>
 import procgen, {types} from './procgen.js';
 
@@ -22,7 +22,7 @@ const [
   })(),
 ]);
 console.log('got token', token);
-const {name} = token;
+const {id, name, image, minter: {avatarPreview: minterAvatarPreview}} = token;
 const spec = procgen(id + '')[0];
 
 const cardWidth = 500;
@@ -32,6 +32,9 @@ const svg = document.createElement('svg');
 svg.width = cardWidth;
 svg.width = cardHeight;
 svg.innerHTML = cardSvgSource;
+
+const container = document.getElementById('container');
+container.appendChild(svg);
 
 {
   const el = svg;
