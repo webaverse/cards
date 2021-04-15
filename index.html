@@ -3,9 +3,27 @@
 <body>
   <div className="card-svg-inner"></div>
 <script type=module>
+import procgen, {types} from './procgen.js';
+
 (async () => {
-const res = await fetch('/cards.svg');
-const cardSvgSource = await res.text();
+const [
+  cardSvgSource,
+  token,
+] = await Promise.all([
+  (async () => {
+    const res = await fetch('/cards.svg');
+    const cardSvgSource = await res.text();
+    return cardSvgSource;
+  })(),
+  (async () => {
+    const res = await fetch('https://tokens.webaverse.com/1');
+    const token = await res.json();
+    return token;
+  })(),
+]);
+console.log('got token', token);
+const {name} = token;
+const spec = procgen(id + '')[0];
 
 const cardWidth = 500;
 const cardHeight = cardWidth/2.5*3.5;
@@ -19,7 +37,7 @@ svg.innerHTML = cardSvgSource;
   const el = svg;
 
   const titleTextEl = el.querySelector('#title-text');
-  titleTextEl.innerHTML = assetName;
+  titleTextEl.innerHTML = name;
   for (let i = 0; i < types.length; i++) {
     const type = types[i];
     const typeEl = el.querySelector('#type-' + type);
