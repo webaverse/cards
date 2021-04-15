@@ -63,6 +63,18 @@ function parseQuery(queryString) {
 (async () => {
 const qs = parseQuery(window.location.search);
 const tokenId = parseInt(qs.t, 10);
+let cardWidth = parseInt(qs.w, 10);
+if (cardWidth > 0) {
+  // nothing
+} else {
+  cardWidth = 500;
+}
+let cardHeight = parseInt(qs.h, 10);
+if (cardHeight > 0) {
+ // nothing
+} else {
+  cardHeight = cardWidth / 2.5 * 3.5;
+}
 
 if (!isNaN(tokenId)) {
   const [
@@ -83,9 +95,6 @@ if (!isNaN(tokenId)) {
   console.log('got token', token);
   const {id, name, image, minter: {avatarPreview: minterAvatarPreview}} = token;
   const spec = procgen(id + '')[0];
-
-  const cardWidth = 500;
-  const cardHeight = cardWidth/2.5*3.5;
 
   const svg = document.createElement('svg');
   svg.setAttribute('width', cardWidth);
