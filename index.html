@@ -75,12 +75,7 @@ if (cardWidth > 0) {
 } else {
   cardWidth = 500;
 }
-let cardHeight = parseInt(qs.h, 10);
-if (cardHeight > 0) {
- // nothing
-} else {
-  cardHeight = cardWidth / 2.5 * 3.5;
-}
+const cardHeight = cardWidth / 2.5 * 3.5;
 
 if (!isNaN(tokenId)) {
   const [
