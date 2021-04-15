@@ -38,10 +38,15 @@
     font-family: 'FuturaLT-Book';
     src: url('/fonts/FuturaLT-Book.ttf');
   }
+  #container {
+    --size: 300px;
+    width: var(--size);
+    height: calc(var(--size) / 2.5 * 3.5);
+  }
 </style>
 </head>
 <body>
-<div className="card-svg-inner" id=container></div>
+<div id=container></div>
 <script type=module>
 import procgen, {types} from './procgen.js';
 
@@ -69,8 +74,8 @@ const cardWidth = 500;
 const cardHeight = cardWidth/2.5*3.5;
 
 const svg = document.createElement('svg');
-svg.width = cardWidth;
-svg.height = cardHeight;
+svg.setAttribute('width', cardWidth);
+svg.setAttribute('height', cardHeight);
 svg.innerHTML = cardSvgSource;
 
 const container = document.getElementById('container');
