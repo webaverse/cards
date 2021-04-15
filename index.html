@@ -146,6 +146,18 @@ if (!isNaN(tokenId)) {
     }
   }
   
+  /* {
+    const images = Array(svg.querySelectorAll('image'));
+    console.log('got images 1', images);
+    await Promise.all(images.map(image => new Promise((accept, reject) => {
+      image.addEventListener('load', e => {
+        accept();
+      });
+      image.addEventListener('error', reject);
+    })));
+    console.log('got images 2', images);
+  } */
+  
   await Promise.all([
     'FuturaLT',
     'MS-Gothic',
