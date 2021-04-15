@@ -148,6 +148,11 @@ if (!isNaN(tokenId)) {
       p.style = `fill:url(#${g.id});`;
     }
   }
+  
+  window.parent.postMessage({
+    ok: true,
+  }, '*');
+  
   console.log('done render');
 }
 })();
