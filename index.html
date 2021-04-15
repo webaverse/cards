@@ -2,6 +2,17 @@
 <html>
 <head>
 <style>
+  body {
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  #container {
+    --size: 300px;
+    width: var(--size);
+    height: calc(var(--size) / 2.5 * 3.5);
+  }
   @font-face {
     font-family: 'FuturaLT';
     src: url('/fonts/FuturaLT.woff2');
@@ -37,11 +48,6 @@
   @font-face {
     font-family: 'FuturaLT-Book';
     src: url('/fonts/FuturaLT-Book.ttf');
-  }
-  #container {
-    --size: 300px;
-    width: var(--size);
-    height: calc(var(--size) / 2.5 * 3.5);
   }
 </style>
 </head>
