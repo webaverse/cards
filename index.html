@@ -146,7 +146,7 @@ if (!isNaN(tokenId)) {
     }
   }
   
-  /* await Promise.all([
+  /* const _waitForAllCardFonts = () => Promise.all([
     'FuturaLT',
     'MS-Gothic',
     'FuturaStd-BoldOblique',
@@ -158,8 +158,11 @@ if (!isNaN(tokenId)) {
     'FuturaLT-Book',
   ].map(fontFamily => {
     return document.fonts.load(`16px "${fontFamily}"`);
-  })); */
-  
+  })).then(() => {});
+  _waitForAllCardFonts().catch(err => {
+    console.warn(err);
+  }); */
+
   /* window.parent.postMessage({
     ok: true, 
   }, '*'); */
