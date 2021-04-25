@@ -12,7 +12,16 @@ function parseQuery(queryString) {
 
 (async () => {
 const qs = parseQuery(window.location.search);
-const {t, w} = qs;
+const {
+  t,
+  w,
+  id,
+  name,
+  description,
+  image,
+  minterUsername,
+  minterAvatarPreview,
+} = qs;
 const tokenId = parseInt(t, 10);
 let cardWidth = parseInt(w, 10);
 if (cardWidth > 0) {
@@ -22,24 +31,15 @@ if (cardWidth > 0) {
 }
 const cardHeight = cardWidth / 2.5 * 3.5;
 
-if (!isNaN(tokenId)) {
-  const [
-    cardSvgSource,
-    token,
-  ] = await Promise.all([
-    (async () => {
-      const res = await fetch('/cards.svg');
-      const cardSvgSource = await res.text();
-      return cardSvgSource;
-    })(),
-    (async () => {
-      const res = await fetch(`https://tokens.webaverse.com/${tokenId}`);
-      const token = await res.json();
-      return token;
-    })(),
-  ]);
-  console.log('got token', token);
-  const {id, name, image, minter: {username: minterUsername, avatarPreview: minterAvatarPreview}} = token;
+const _drawCard = async ({
+  id,
+  name,
+  description,
+  image,
+  minterUsername,
+  minterAvatarPreview,
+  cardSvgSource,
+}) => {
   const spec = procgen(id + '')[0];
 
   const svg = document.createElement('svg');
@@ -73,11 +73,18 @@ if (!isNaN(tokenId)) {
       const statEl = el.querySelector('#' + statName);
       const texts = statEl.querySelectorAll('text');
       const textEl = texts[texts.length - 1];
-      textEl.innerHTML = spec.stats[statName] + '';
+      textEl.innerHTML = escape(spec.stats[statName] + '');
     });
     {
       const imageEl = el.querySelector('#Image image');
       imageEl.setAttribute('xlink:href', image);
+    }
+    {
+      const lines = description.split('\n');
+      const descriptionHeaderTextEl = el.querySelector('#description-header-text');
+      descriptionHeaderTextEl.innerHTML = escape(lines[0]);
+      const descriptionBodyTextEl = el.querySelector('#description-body-text');
+      descriptionBodyTextEl.innerHTML = escape(lines.slice(1).join('\n'));
     }
     {
       const avatarImageEl = el.querySelector('#avatar-image image');
@@ -120,7 +127,47 @@ if (!isNaN(tokenId)) {
   /* window.parent.postMessage({
     ok: true, 
   }, '*'); */
+};
 
-  console.log('cards done render');
+if (!isNaN(tokenId)) {
+  const [
+    cardSvgSource,
+    token,
+  ] = await Promise.all([
+    (async () => {
+      const res = await fetch('/cards.svg');
+      const cardSvgSource = await res.text();
+      return cardSvgSource;
+    })(),
+    (async () => {
+      const res = await fetch(`https://tokens.webaverse.com/${tokenId}`);
+      const token = await res.json();
+      return token;
+    })(),
+  ]);
+  console.log('got token', token);
+  const {id, name, description, image, minter: {username: minterUsername, avatarPreview: minterAvatarPreview}} = token;
+  
+  _drawCard({
+    id,
+    name,
+    description,
+    image,
+    minterUsername,
+    minterAvatarPreview,
+    cardSvgSource,
+  });
+} else if (id && name && description && image && minterUsername && minterAvatarPreview) {
+  _drawCard({
+    id,
+    name,
+    description,
+    image,
+    minterUsername,
+    minterAvatarPreview,
+  });
+} else {
 }
+
+console.log('cards done render');
 })();
