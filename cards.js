@@ -12,8 +12,9 @@ function parseQuery(queryString) {
 
 (async () => {
 const qs = parseQuery(window.location.search);
-const tokenId = parseInt(qs.t, 10);
-let cardWidth = parseInt(qs.w, 10);
+const {t, w} = qs;
+const tokenId = parseInt(t, 10);
+let cardWidth = parseInt(w, 10);
 if (cardWidth > 0) {
   // nothing
 } else {
