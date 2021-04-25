@@ -174,6 +174,7 @@ if (!isNaN(tokenId)) {
     minterAvatarPreview,
   });
 } else {
+  console.warn('invalid qs params:', qs);
 }
 
 console.log('cards done render');
