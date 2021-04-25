@@ -39,7 +39,7 @@ if (!isNaN(tokenId)) {
     })(),
   ]);
   console.log('got token', token);
-  const {id, name, image, minter: {avatarPreview: minterAvatarPreview}} = token;
+  const {id, name, image, minter: {username: minterUsername, avatarPreview: minterAvatarPreview}} = token;
   const spec = procgen(id + '')[0];
 
   const svg = document.createElement('svg');
@@ -82,6 +82,10 @@ if (!isNaN(tokenId)) {
     {
       const avatarImageEl = el.querySelector('#avatar-image image');
       avatarImageEl.setAttribute('xlink:href', minterAvatarPreview);
+    }
+    {
+      const ilustratorTextEl = el.querySelector('#illustrator-text');
+      ilustratorTextEl.innerHTML = escape(minterUsername);
     }
     {
       const stopEls = el.querySelectorAll('#Background linearGradient > stop');
