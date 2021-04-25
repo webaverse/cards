@@ -165,6 +165,12 @@ if (!isNaN(tokenId)) {
   typeof minterUsername === 'string' &&
   typeof minterAvatarPreview === 'string'
 ) {
+  const cardSvgSource = await (async () => {
+    const res = await fetch('/cards.svg');
+    const cardSvgSource = await res.text();
+    return cardSvgSource;
+  })();
+  
   _drawCard({
     id,
     name,
@@ -172,6 +178,7 @@ if (!isNaN(tokenId)) {
     image,
     minterUsername,
     minterAvatarPreview,
+    cardSvgSource,
   });
 } else {
   console.warn('invalid qs params:', qs);
