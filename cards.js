@@ -157,7 +157,14 @@ if (!isNaN(tokenId)) {
     minterAvatarPreview,
     cardSvgSource,
   });
-} else if (id && name && description && image && minterUsername && minterAvatarPreview) {
+} else if (
+  typeof id === 'string' &&
+  typeof name === 'string' &&
+  typeof description === 'string' &&
+  typeof image === 'string' &&
+  typeof minterUsername === 'string' &&
+  typeof minterAvatarPreview === 'string'
+) {
   _drawCard({
     id,
     name,
