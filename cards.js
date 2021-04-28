@@ -82,9 +82,9 @@ const _drawCard = async ({
     {
       const lines = description.split('\n');
       const descriptionHeaderTextEl = el.querySelector('#description-header-text');
-      descriptionHeaderTextEl.innerHTML = escape(lines[0]);
+      descriptionHeaderTextEl.innerHTML = lines[0];
       const descriptionBodyTextEl = el.querySelector('#description-body-text');
-      descriptionBodyTextEl.innerHTML = escape(lines.slice(1).join('\n'));
+      descriptionBodyTextEl.innerHTML = lines.slice(1).join('\n');
     }
     {
       const avatarImageEl = el.querySelector('#avatar-image image');
@@ -92,7 +92,7 @@ const _drawCard = async ({
     }
     {
       const ilustratorTextEl = el.querySelector('#illustrator-text');
-      ilustratorTextEl.innerHTML = escape(minterUsername);
+      ilustratorTextEl.innerHTML = minterUsername;
     }
     {
       const stopEls = el.querySelectorAll('#Background linearGradient > stop');
