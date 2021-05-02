@@ -181,7 +181,16 @@ if (!isNaN(tokenId)) {
     cardSvgSource,
   });
 } else {
-  console.warn('invalid qs params:', qs);
+  console.warn('invalid qs params:', qs, [
+    isNaN(tokenId),
+  ], [
+    typeof id === 'string',
+    typeof name === 'string',
+    typeof description === 'string',
+    typeof image === 'string',
+    typeof minterUsername === 'string',
+    typeof minterAvatarPreview === 'string',
+  ]);
 }
 
 console.log('cards done render');
