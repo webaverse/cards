@@ -143,7 +143,7 @@ if (
   })();
   
   _drawCard({
-    tokenId,
+    id: tokenId,
     name,
     description,
     image,
