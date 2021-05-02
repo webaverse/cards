@@ -182,7 +182,7 @@ if (!isNaN(tokenId)) {
   });
 } else {
   console.warn('invalid qs params:', qs, [
-    isNaN(tokenId),
+    !isNaN(tokenId),
   ], [
     typeof id === 'string',
     typeof name === 'string',
