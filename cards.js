@@ -40,6 +40,7 @@ const _drawCard = async ({
   cardSvgSource,
 }) => {
   const spec = procgen(id + '')[0];
+  console.log('card procgen', {id, name, description});
 
   const svg = document.createElement('svg');
   svg.setAttribute('width', cardWidth);
