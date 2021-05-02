@@ -128,8 +128,30 @@ const _drawCard = async ({
     ok: true, 
   }, '*'); */
 };
-
-if (!isNaN(tokenId)) {
+if (
+  typeof id === 'string' &&
+  typeof name === 'string' &&
+  typeof description === 'string' &&
+  typeof image === 'string' &&
+  typeof minterUsername === 'string' &&
+  typeof minterAvatarPreview === 'string'
+) {
+  const cardSvgSource = await (async () => {
+    const res = await fetch('/cards.svg');
+    const cardSvgSource = await res.text();
+    return cardSvgSource;
+  })();
+  
+  _drawCard({
+    id,
+    name,
+    description,
+    image,
+    minterUsername,
+    minterAvatarPreview,
+    cardSvgSource,
+  });
+} else if (!isNaN(tokenId)) {
   const [
     cardSvgSource,
     token,
@@ -147,29 +169,6 @@ if (!isNaN(tokenId)) {
   ]);
   console.log('got token', token);
   const {id, name, description, image, minter: {username: minterUsername, avatarPreview: minterAvatarPreview}} = token;
-  
-  _drawCard({
-    id,
-    name,
-    description,
-    image,
-    minterUsername,
-    minterAvatarPreview,
-    cardSvgSource,
-  });
-} else if (
-  typeof id === 'string' &&
-  typeof name === 'string' &&
-  typeof description === 'string' &&
-  typeof image === 'string' &&
-  typeof minterUsername === 'string' &&
-  typeof minterAvatarPreview === 'string'
-) {
-  const cardSvgSource = await (async () => {
-    const res = await fetch('/cards.svg');
-    const cardSvgSource = await res.text();
-    return cardSvgSource;
-  })();
   
   _drawCard({
     id,
