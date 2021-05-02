@@ -15,7 +15,6 @@ const qs = parseQuery(window.location.search);
 const {
   t,
   w,
-  id,
   name,
   description,
   image,
@@ -129,7 +128,7 @@ const _drawCard = async ({
   }, '*'); */
 };
 if (
-  typeof id === 'string' &&
+  !isNaN(tokenId) &&
   typeof name === 'string' &&
   typeof description === 'string' &&
   typeof image === 'string' &&
@@ -143,7 +142,7 @@ if (
   })();
   
   _drawCard({
-    id,
+    tokenId,
     name,
     description,
     image,
