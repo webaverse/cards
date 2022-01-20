@@ -110,6 +110,32 @@ const _drawCard = async ({
       p.style = `fill:url(#${g.id});`;
     }
   }
+
+  (async () => {
+    const outerHTML = svg.outerHTML;
+    const blob = new Blob([outerHTML], {type: 'image/svg+xml'});
+    const url = URL.createObjectURL(blob);
+    
+    /* const canvas = document.createElement('canvas');
+    canvas.width = cardWidth;
+    canvas.height = cardHeight;
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    
+    const cvg = await Canvg.from(ctx, url);
+    cvg.start(); */
+
+    const image = document.createElement('img');
+    image.onload = () => {
+      console.log('image load', image);
+    };
+    image.onerror = err => {
+      console.log('image error', err);
+    };
+    image.crossOrigin = 'Anonymous';
+    image.src = url;
+    document.body.appendChild(image);
+  })();
   
   /* const _waitForAllCardFonts = () => Promise.all([
     'FuturaLT',
