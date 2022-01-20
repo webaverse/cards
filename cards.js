@@ -1,5 +1,8 @@
 import procgen, {types} from './procgen.js';
 
+const baseUrl = import.meta.url.replace(/(\/)[^\/\\]*$/, '$1');
+const cardsSvgUrl = `${baseUrl}cards.svg`;
+
 function parseQuery(queryString) {
   var query = {};
   var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
@@ -137,7 +140,8 @@ if (
   typeof minterAvatarPreview === 'string'
 ) {
   const cardSvgSource = await (async () => {
-    const res = await fetch('/cards.svg');
+    // console.log('base url', baseUrl);
+    const res = await fetch(cardsSvgUrl);
     const cardSvgSource = await res.text();
     return cardSvgSource;
   })();
@@ -157,7 +161,7 @@ if (
     token,
   ] = await Promise.all([
     (async () => {
-      const res = await fetch('/cards.svg');
+      const res = await fetch(cardsSvgUrl);
       const cardSvgSource = await res.text();
       return cardSvgSource;
     })(),
